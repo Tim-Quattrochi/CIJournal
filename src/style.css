@@ -73,3 +73,20 @@ button {
 button:hover {
   background-color: var(--accent-color);
 }
+
+section#journal-entries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#journal-entries > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  box-shadow: var(--box-shadow);
+}
