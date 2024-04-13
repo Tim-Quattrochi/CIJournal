@@ -1,9 +1,5 @@
 import {
   getFirestore,
-  doc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
   collection,
   addDoc,
   query,
@@ -38,7 +34,6 @@ export const createJournalEntry = async (
     };
 
     await addDoc(journalCollection, newJournalEntry);
-
   } catch (error) {
     console.error("Error creating journal entry:", error);
   }
