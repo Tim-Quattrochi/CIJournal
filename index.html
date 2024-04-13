@@ -1,13 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Basic Journal</title>
   </head>
   <body>
-    <div id="app"></div>
+    <main>
+      <nav>
+        <ul>
+          <li>
+            <button id="register-btn">Register</button>
+          </li>
+          <li>
+            <button id="login-btn">Login</button>
+          </li>
+          <li>
+            <button class="hidden" id="journal-btn">
+              Submit Journal
+            </button>
+          </li>
+          <li>
+            <button class="hidden" id="logout-btn">Logout</button>
+          </li>
+        </ul>
+      </nav>
+
+      <section id="register" class="hidden">
+        <h2>Register</h2>
+        <form id="register-form">
+          <label for="email">Email:</label><br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+          /><br />
+          <label for="password">Password:</label><br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+          /><br />
+          <input type="submit" value="Register" />
+        </form>
+      </section>
+
+      <section id="login" class="hidden">
+        <h2>Login</h2>
+        <form id="login-form">
+          <label for="login-email">Email:</label><br />
+          <input
+            type="email"
+            id="login-email"
+            name="email"
+            required
+          /><br />
+          <label for="login-password">Password:</label><br />
+          <input
+            type="password"
+            id="login-password"
+            name="password"
+            required
+          /><br />
+          <input type="submit" value="Login" />
+        </form>
+      </section>
+
+      <section id="journal" class="hidden">
+        <h2>Submit Journal</h2>
+        <form id="journal-form">
+          <label for="journal-entry">Journal Entry:</label><br />
+          <textarea
+            id="journal-entry"
+            name="journal-entry"
+            rows="4"
+            cols="50"
+            required
+          ></textarea
+          ><br />
+          <input type="submit" value="Submit" />
+        </form>
+      </section>
+      <section id="journal-entries"></section>
+    </main>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
