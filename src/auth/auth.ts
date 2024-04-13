@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { app } from "../utils/firebase.config";
 import { showSection } from "../utils/helpers";
 import { fetchJournals, displayJournals } from "../journal";
@@ -35,7 +36,8 @@ export const handleRegister = async (event: Event): Promise<void> => {
 
     showSection("journal", true);
   } catch (error) {
-    const errorMessage = error.message;
+    const firebaseError = error as FirebaseError;
+    const errorMessage = firebaseError.message;
     console.log(errorMessage);
   }
 };
@@ -69,7 +71,8 @@ export const handleLogin = async (event: Event): Promise<void> => {
     console.log(journals);
     displayJournals(journals);
   } catch (error) {
-    const errorMessage = error.message;
+    const firebaseError = error as FirebaseError;
+    const errorMessage = firebaseError.message;
     console.log(errorMessage);
   }
 };

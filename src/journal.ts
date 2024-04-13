@@ -5,6 +5,7 @@ import {
   query,
   where,
   getDocs,
+  DocumentData,
 } from "firebase/firestore";
 import { formatDate } from "./utils/helpers";
 
@@ -45,13 +46,13 @@ interface Journal {
   createdAt: string;
 }
 
-export const displayJournals = (journals: Journal[]) => {
+export const displayJournals = (journals: DocumentData) => {
   const journalList = document.getElementById("journal-entries");
 
   if (journalList) {
     journalList.innerHTML = journals
       .map(
-        (journal) => `
+        (journal: Journal) => `
       <div class="entry">
         <p>${journal.entry}</p>
         <p class="date">${formatDate(journal.createdAt)}</p>

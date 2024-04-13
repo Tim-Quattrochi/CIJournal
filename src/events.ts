@@ -3,7 +3,7 @@ import { app } from "./utils/firebase.config";
 import { showSection } from "./utils/helpers";
 import { createJournalEntry } from "./journal";
 import { handleRegister, handleLogin } from "./auth/auth";
-
+import { FirebaseError } from "firebase/app";
 const handleLogout = async (): Promise<void> => {
   try {
     await getAuth(app).signOut();
@@ -31,7 +31,8 @@ const handleJournalSubmit = async (event: Event): Promise<void> => {
       console.log("User not logged in.");
     }
   } catch (error) {
-    const errorMessage = error.message;
+    const firebaseError = error as FirebaseError;
+    const errorMessage = firebaseError.message;
     console.log(errorMessage);
   }
 };
