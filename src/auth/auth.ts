@@ -74,16 +74,18 @@ export const handleLogin = async (event: Event): Promise<void> => {
   }
 };
 
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    showSection("journal", true);
+export async function handleAuthStateChange() {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      showSection("journal", true);
 
-    const journals = await fetchJournals(user.uid);
-    console.log(journals);
-    displayJournals(journals);
-  } else {
-    showSection("login", true);
-    showSection("journal", false);
-    showSection("journal-form", false);
-  }
-});
+      const journals = await fetchJournals(user.uid);
+      console.log(journals);
+      displayJournals(journals);
+    } else {
+      showSection("login", true);
+      showSection("journal", false);
+      showSection("journal-form", false);
+    }
+  });
+}

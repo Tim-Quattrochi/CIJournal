@@ -39,7 +39,13 @@ export const createJournalEntry = async (
   }
 };
 
-export const displayJournals = (journals: any[]) => {
+interface Journal {
+  id?: string;
+  entry: string;
+  createdAt: string;
+}
+
+export const displayJournals = (journals: Journal[]) => {
   const journalList = document.getElementById("journal-entries");
 
   if (journalList) {
