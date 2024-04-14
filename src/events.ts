@@ -4,6 +4,7 @@ import { showSection } from "./utils/helpers";
 import { createJournalEntry } from "./journal";
 import { handleRegister, handleLogin } from "./auth/auth";
 import { FirebaseError } from "firebase/app";
+
 const handleLogout = async (): Promise<void> => {
   try {
     await getAuth(app).signOut();
@@ -13,7 +14,9 @@ const handleLogout = async (): Promise<void> => {
   }
 };
 
-const handleJournalSubmit = async (event: Event): Promise<void> => {
+export const handleJournalSubmit = async (
+  event: Event
+): Promise<void> => {
   event.preventDefault();
 
   const entryInput = document.getElementById(
@@ -23,6 +26,16 @@ const handleJournalSubmit = async (event: Event): Promise<void> => {
   const entry = entryInput.value;
 
   try {
+    if (entry.length === 0) {
+      const validationMessage = document.createElement("div");
+      validationMessage.id = "validation-message";
+      validationMessage.textContent = "Journal entry is required.";
+      document
+        .getElementById("journal-form")
+        ?.appendChild(validationMessage);
+
+      return;
+    }
     const user = getAuth(app).currentUser;
 
     if (user) {
