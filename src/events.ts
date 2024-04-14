@@ -2,7 +2,11 @@ import { getAuth } from "firebase/auth";
 import { app } from "./utils/firebase.config";
 import { showSection } from "./utils/helpers";
 import { createJournalEntry } from "./journal";
-import { handleRegister, handleLogin } from "./auth/auth";
+import {
+  handleRegister,
+  handleLogin,
+  handleAuthStateChange,
+} from "./auth/auth";
 import { FirebaseError } from "firebase/app";
 
 const handleLogout = async (): Promise<void> => {
@@ -85,4 +89,6 @@ export function setUpEventListeners(): void {
       button.addEventListener("click", handler);
     }
   });
+
+  handleAuthStateChange();
 }

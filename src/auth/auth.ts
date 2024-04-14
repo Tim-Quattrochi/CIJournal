@@ -27,13 +27,13 @@ export const handleRegister = async (event: Event): Promise<void> => {
   const password = passwordInput.value;
 
   try {
-    const userCredential = await createUserWithEmailAndPassword(
+    await createUserWithEmailAndPassword(
       getAuth(app),
       email,
       password
     );
-    const user = userCredential.user;
 
+    await setPersistence(auth, browserLocalPersistence);
     showSection("journal", true);
   } catch (error) {
     const firebaseError = error as FirebaseError;
@@ -56,13 +56,13 @@ export const handleLogin = async (event: Event): Promise<void> => {
   const password = passwordInput.value;
 
   try {
-    await setPersistence(auth, browserLocalPersistence);
-
     const userCredential = await signInWithEmailAndPassword(
       getAuth(app),
       email,
       password
     );
+    await setPersistence(auth, browserLocalPersistence);
+
     const user = userCredential.user;
 
     showSection("journal", true);
@@ -89,6 +89,7 @@ export async function handleAuthStateChange() {
       showSection("login", true);
       showSection("journal", false);
       showSection("journal-form", false);
+      showSection("journal-entries", false);
     }
   });
 }
